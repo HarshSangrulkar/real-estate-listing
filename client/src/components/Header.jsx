@@ -31,7 +31,7 @@ export default function Header() {
             <span className="text-slate-700">Estate-Listing</span>
           </h1>
         </Link>
-        <form
+        {/* <form
           onSubmit={handleSubmit}
           className="bg-slate-100 p-3 rounded-lg flex items-center"
         >
@@ -45,11 +45,16 @@ export default function Header() {
           <button>
             <FaSearch className="text-slate-600" />
           </button>
-        </form>
+        </form> */}
         <ul className="flex gap-4">
           <Link to="/">
             <li className="hidden sm:inline text-slate-700 hover:underline">
               Home
+            </li>
+          </Link>
+          <Link to="/search">
+            <li className="hidden sm:inline text-slate-700 hover:underline">
+              Properties
             </li>
           </Link>
           <Link to="/about">
@@ -59,11 +64,7 @@ export default function Header() {
           </Link>
           <Link to="/profile">
             {currentUser ? (
-              <img
-                className="rounded-full h-7 w-7 object-cover"
-                src={currentUser.avatar}
-                alt="profile"
-              />
+              <li className=" text-slate-700 hover:underline">Profile</li>
             ) : (
               <li className=" text-slate-700 hover:underline"> Sign in</li>
             )}
