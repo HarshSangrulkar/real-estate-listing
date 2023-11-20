@@ -55,22 +55,20 @@ export default function Home() {
     <div>
       <MainPage></MainPage>
       {/* top */}
-      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-          Find your next <span className="text-slate-500">perfect</span>
-          <br />
-          place with ease
+      <div className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white p-12 max-w-3xl mx-auto rounded-md shadow-lg">
+        <h1 className="text-4xl lg:text-6xl font-extrabold mb-4">
+          Discover Your <span className="text-yellow-300">Dream</span> Home
         </h1>
-        <div className="text-gray-400 text-xs sm:text-sm">
-          best place to find your next perfect place to live.
+        <p className="text-lg text-gray-300 mb-6">
+          Find the perfect place to live with our diverse range of properties.
           <br />
-          We have a wide range of properties for you to choose from.
-        </div>
+          Your dream home is just a click away.
+        </p>
         <Link
           to={"/search"}
-          className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
+          className="text-lg bg-yellow-400 px-6 py-3 rounded-full font-semibold hover:bg-yellow-500 transition duration-300"
         >
-          Let's get started...
+          Let's Start Exploring
         </Link>
       </div>
 

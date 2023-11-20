@@ -26,7 +26,7 @@ export default function Header() {
     <header className="bg-blue-900 text-white shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
         <Link to="/">
-          <h1 className="font-bold text-lg sm:text-2xl flex items-center">
+          <h1 className="font-extrabold text-lg sm:text-2xl flex items-center">
             <span className="text-yellow-300">🏡</span>
             <span className="ml-2">NexHOME</span>
           </h1>
@@ -34,21 +34,29 @@ export default function Header() {
 
         <ul className="flex gap-4">
           <Link to="/">
-            <li className="hidden sm:inline hover:text-yellow-300">🏠 Home</li>
+            <li className="hidden sm:inline hover:text-yellow-300 font-semibold">
+              🏠 Home
+            </li>
           </Link>
           <Link to="/search">
-            <li className="hidden sm:inline hover:text-yellow-300">
+            <li className="hidden sm:inline hover:text-yellow-300 font-semibold">
               🔍 Properties
             </li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline hover:text-yellow-300">📖 About</li>
+            <li className="hidden sm:inline hover:text-yellow-300 font-semibold">
+              📖 About
+            </li>
           </Link>
           <Link to="/profile">
             {currentUser ? (
-              <li className="hover:text-yellow-300">👤 Profile</li>
+              <li className="hover:text-yellow-300 font-semibold">
+                👤 Profile
+              </li>
             ) : (
-              <li className="hover:text-yellow-300">🔐 Sign in</li>
+              <li className="hover:text-yellow-300 font-semibold">
+                🔐 Sign in
+              </li>
             )}
           </Link>
         </ul>
