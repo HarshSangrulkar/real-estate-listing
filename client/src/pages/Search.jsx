@@ -9,7 +9,6 @@ export default function Search() {
     type: "all",
     parking: false,
     furnished: false,
-    offer: false,
     sort: "created_at",
     order: "desc",
   });
@@ -24,7 +23,6 @@ export default function Search() {
     const typeFromUrl = urlParams.get("type");
     const parkingFromUrl = urlParams.get("parking");
     const furnishedFromUrl = urlParams.get("furnished");
-    const offerFromUrl = urlParams.get("offer");
     const sortFromUrl = urlParams.get("sort");
     const orderFromUrl = urlParams.get("order");
 
@@ -33,7 +31,6 @@ export default function Search() {
       typeFromUrl ||
       parkingFromUrl ||
       furnishedFromUrl ||
-      offerFromUrl ||
       sortFromUrl ||
       orderFromUrl
     ) {
@@ -42,25 +39,30 @@ export default function Search() {
         type: typeFromUrl || "all",
         parking: parkingFromUrl === "true" ? true : false,
         furnished: furnishedFromUrl === "true" ? true : false,
-        offer: offerFromUrl === "true" ? true : false,
         sort: sortFromUrl || "created_at",
         order: orderFromUrl || "desc",
       });
     }
 
     const fetchListings = async () => {
-      setLoading(true);
-      setShowMore(false);
-      const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/listing/get?${searchQuery}`);
-      const data = await res.json();
-      if (data.length > 8) {
-        setShowMore(true);
-      } else {
+      try {
+        setLoading(true);
         setShowMore(false);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/listing/get?${searchQuery}`);
+        const data = await res.json();
+        console.log("API Response Data:", data); // Add this console log
+        if (data.length > 8) {
+          setShowMore(true);
+        } else {
+          setShowMore(false);
+        }
+        setListings(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching listings:", error); // Add this console log
+        setLoading(false);
       }
-      setListings(data);
-      setLoading(false);
     };
 
     fetchListings();
@@ -79,23 +81,16 @@ export default function Search() {
       setSidebardata({ ...sidebardata, searchTerm: e.target.value });
     }
 
-    if (
-      e.target.id === "parking" ||
-      e.target.id === "furnished" ||
-      e.target.id === "offer"
-    ) {
+    if (e.target.id === "parking" || e.target.id === "furnished") {
       setSidebardata({
         ...sidebardata,
-        [e.target.id]:
-          e.target.checked || e.target.checked === "true" ? true : false,
+        [e.target.id]: e.target.checked || e.target.checked === "true",
       });
     }
 
     if (e.target.id === "sort_order") {
       const sort = e.target.value.split("_")[0] || "created_at";
-
       const order = e.target.value.split("_")[1] || "desc";
-
       setSidebardata({ ...sidebardata, sort, order });
     }
   };
@@ -107,7 +102,7 @@ export default function Search() {
     urlParams.set("type", sidebardata.type);
     urlParams.set("parking", sidebardata.parking);
     urlParams.set("furnished", sidebardata.furnished);
-    urlParams.set("offer", sidebardata.offer);
+    //urlParams.set("offer", sidebardata.offer);
     urlParams.set("sort", sidebardata.sort);
     urlParams.set("order", sidebardata.order);
     const searchQuery = urlParams.toString();
